@@ -1,0 +1,95 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk Config.compileSdkVersion
+
+    defaultConfig {
+        applicationId Config.applicationId
+        minSdk Config.minSdkVersion
+        targetSdk Config.targetSdkVersion
+        versionCode Config.versionCode
+        versionName Config.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        compose true
+        viewBinding true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Versions.composeVersion
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+
+}
+
+dependencies {
+    implementation Libs.coreKtx
+    implementation Libs.kotlinJdk
+    implementation Libs.fragment
+    implementation Libs.navigationCompose
+    implementation Libs.volley
+
+    // Coroutines
+    implementation Libs.coroutineCore
+    implementation Libs.coroutine
+
+
+    implementation Libs.coroutinePlayService
+    implementation Libs.mapsPlayService
+
+    implementation Libs.retrofit
+    implementation Libs.retrofitConverter
+
+    // Coroutine Lifecycle Scopes
+    implementation Libs.lifecycleViewModel
+    implementation Libs.lifecycleRuntime
+    implementation Libs.lifecycleLiveData
+
+    //Google Maps
+    implementation Libs.mapKtx
+    implementation Libs.googleMaps
+
+    //Compose
+    implementation Libs.composeUi
+    implementation Libs.composeMaterial
+    implementation Libs.composePreview
+    implementation Libs.composeActivity
+
+    //Dagger - Hilt
+    implementation Libs.hilt
+    kapt Libs.hiltCompiler
+    implementation Libs.hiltNavigationCompose
+    kapt Libs.daggerCompiler
+
+    //Tests
+    testImplementation Libs.junit
+    androidTestImplementation Libs.junitExt
+    androidTestImplementation Libs.espresso
+}
